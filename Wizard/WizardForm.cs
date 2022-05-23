@@ -17,7 +17,7 @@ namespace Wizard
         private List<ProjectType> _projectTypes = new List<ProjectType>() {
             new ProjectType() { Name="WebApi", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name= "Web Api", TemplateFilename = "WorksWebApi.zip" }, new ProjectTemplate() { Name = "Minimal Web Api", TemplateFilename = "WorksMinimalWebApi.zip" } }, Type = ProjectTypeEnum.WebApi },
             new ProjectType() { Name="MVC Web Site" , Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name = "MVC Web Site", TemplateFilename = "WorksMvcWeb.zip" }, new ProjectTemplate() { Name= "Authenticated MVC Web Site", TemplateFilename = "WorksAuthMvcWeb.zip" } }, Type = ProjectTypeEnum.MVCWebsite },
-            new ProjectType() { Name="Angular Web Site" , Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name = "Angular Web Site", TemplateFilename = "WorksAngularWeb.zip" } ,new ProjectTemplate() { Name = "Authenticated Angular Web Site", TemplateFilename = "WorksAuthAngularWeb.zip" }  }, Type = ProjectTypeEnum.AngularWebsite },
+            new ProjectType() { Name="Angular Web Site" , Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name = "Angular Web Site", TemplateFilename = "WorksAngularWeb.zip" }, new ProjectTemplate() { Name = "Authenticated Angular Web Site", TemplateFilename = "WorksAuthAngularWeb.zip" }, new ProjectTemplate() { Name = "Windows Auth Angular Web Site", TemplateFilename = "WorksWindowsAngularWeb.zip" } }, Type = ProjectTypeEnum.AngularWebsite },
             new ProjectType() { Name="Service Library", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { TemplateFilename = "WorksServiceLibrary.zip" } }, Type = ProjectTypeEnum.ServiceLibrary },
             new ProjectType() { Name="Data Layer", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { TemplateFilename = "WorksDataLayer.zip" } } , Type = ProjectTypeEnum.DataLayer },
             new ProjectType() { Name="Console App", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { TemplateFilename = "WorksConsole.zip" } }, Type = ProjectTypeEnum.Console }
@@ -68,6 +68,8 @@ namespace Wizard
                 projectType.Items.Add(projType);
             }
 
+            Reset(_projectTypes[0]);
+
             projectType.SelectedIndex = 0;
 
             foreach (var nuget in _nugetItemPackages)
@@ -83,24 +85,29 @@ namespace Wizard
             }
         }
 
-        private void projectType_SelectedIndexChanged(object sender, EventArgs e)
+        private void Reset(ProjectType type)
         {
-            ProjectType projType = (ProjectType)((ComboBox)sender).SelectedItem;
+            thisProject = new WorksProject()
+            {
+                ProjectName = "",
+                ProjectType = ProjectTypeEnum.WebApi,
+                SelectedTemplate = _projectTypes[0].SelectedTemplate,// ((ProjectType)projectType.SelectedItem).SelectedTemplate,
+                TemplateFilename = _projectTypes[0].SelectedTemplate.TemplateFilename//((ProjectType)projectType.SelectedItem).SelectedTemplate.TemplateFilename
+            };
 
-            webApiPanel.Visible = false;
-            servicePanel.Visible = false;
-            dataPanel.Visible = false;
-            angularView.Visible = false;
-            mvcView.Visible = false;
+            webApiPanel.Reset();
+            mvcView.Reset();
+            angularView.Reset();
 
-            switch (projType.Type)
+            thisProject.Extension = null;
+            thisProject.SelectedTemplate = type.SelectedTemplate;
+
+            switch (type.Type)
             {
                 case ProjectTypeEnum.WebApi:
+                    webApiPanel.Init(this, thisProject);
                     webApiPanel.Visible = true;
                     break;
-                //case ProjectTypeEnum.MinimalWebApi:
-                //    webApiPanel.Visible = true;
-                //    break;
                 case ProjectTypeEnum.ServiceLibrary:
                     servicePanel.Visible = true;
                     break;
@@ -108,15 +115,31 @@ namespace Wizard
                     dataPanel.Visible = true;
                     break;
                 case ProjectTypeEnum.MVCWebsite:
+                    mvcView.Init(this, thisProject);
                     mvcView.Visible = true;
                     break;
                 case ProjectTypeEnum.AngularWebsite:
+                    angularView.Init(this, thisProject);
                     angularView.Visible = true;
                     break;
             }
+        }
+
+        private void projectType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ProjectType projType = (ProjectType)((ComboBox)sender).SelectedItem;
+            projType.SelectDefault();
+
+            webApiPanel.Visible = false;
+            servicePanel.Visible = false;
+            dataPanel.Visible = false;
+            angularView.Visible = false;
+            mvcView.Visible = false;
 
             selectedType = projType.Type;
             currentProjectType = projType;
+
+            Reset(projType);
         }
 
         private void close_Click(object sender, EventArgs e)
@@ -149,21 +172,10 @@ namespace Wizard
                     nugetPackages.SetItemChecked(pos++, checkNuget.Default);
                 }
 
-                WorksProject newProjectItem = new WorksProject()
-                {
-                    ProjectName = "",
-                    ProjectType = selectedType,
-                    SelectedTemplate = ((ProjectType)projectType.SelectedItem).SelectedTemplate,
-                    TemplateFilename = ((ProjectType)projectType.SelectedItem).SelectedTemplate.TemplateFilename
-                };
+                Reset(_projectTypes[0]);
 
-                thisProject = newProjectItem;
-
-                webApiPanel.Init(this, newProjectItem);
                 webApiPanel.Enabled = true;
-                mvcView.Init(this, newProjectItem);
                 mvcView.Enabled = true;
-                angularView.Init(this, newProjectItem);
                 angularView.Enabled = true;
             }
             catch (Exception ex)
@@ -178,8 +190,6 @@ namespace Wizard
 
             if (!editing)
             {
-                //Do Add
-                
                 foreach (var nugetCheck in nugetPackages.CheckedItems)
                 {
                     ProjectNuget nuget = (ProjectNuget)nugetCheck;
@@ -189,30 +199,33 @@ namespace Wizard
                 _properties.Projects.Add(thisProject);
                 thisProject.ProjectName = projectName.Text;
 
-                var node = projectTree.Nodes[0].Nodes.Add(projectName.Text);
-                node.Tag = thisProject;
+                ProjectTemplate pType = null;
 
                 switch (projType.Type)
                 {
                     case ProjectTypeEnum.WebApi:
-                        WebApiExtension ext = new WebApiExtension();
-
-                        //Get these from Control
-                        //ext.Controllers.Add(new WebApiController() { Name = "Values" });
-
-                        //thisProject.Extension = ext;
-
+                        pType = webApiPanel.SelectedTemplate;
+                        break;
+                    case ProjectTypeEnum.MVCWebsite:
+                        pType = mvcView.SelectedTemplate;
+                        break;
+                    case ProjectTypeEnum.AngularWebsite:
+                        pType = angularView.SelectedTemplate;
                         break;
                 }
+
+                thisProject.ProjectType = projType.Type;
+                thisProject.SelectedTemplate = pType;
+                thisProject.TemplateFilename = pType.TemplateFilename;
+
+                var node = projectTree.Nodes[0].Nodes.Add(projectName.Text);
+                node.Tag = thisProject;
             }
             else
             {
-                //Do Update
                 var project = (WorksProject)projectTree.SelectedNode.Tag;
                 project.ProjectName = projectName.Text;
-                project.ProjectType = selectedType;
-                project.TemplateFilename = projType.SelectedTemplate.TemplateFilename;
-
+                
                 project.Nugets.Clear();
 
                 foreach (var nugetCheck in nugetPackages.CheckedItems)
@@ -221,18 +234,32 @@ namespace Wizard
                     project.Nugets.Add(nuget);
                 }
 
+                ProjectTemplate pType = null;
+
                 switch (projType.Type)
                 {
                     case ProjectTypeEnum.WebApi:
-                        
-
+                        pType = webApiPanel.SelectedTemplate;
+                        break;
+                    case ProjectTypeEnum.MVCWebsite:
+                        pType = mvcView.SelectedTemplate;
+                        break;
+                    case ProjectTypeEnum.AngularWebsite:
+                        pType = angularView.SelectedTemplate;
                         break;
                 }
+
+                project.ProjectType = projType.Type;
+                project.SelectedTemplate = pType;
+                project.TemplateFilename = pType.TemplateFilename;
             }
 
             newProject.Enabled = true;
 
             projectName.Text = "";
+
+            Reset(_projectTypes[0]);
+
             projectType.SelectedIndex = 0;
 
             projectName.Enabled = false;
@@ -314,6 +341,9 @@ namespace Wizard
                 {
                     case ProjectTypeEnum.WebApi:
                         webApiPanel.Init(this, project);
+
+                        WebApiExtension ext = (WebApiExtension)project.Extension;
+
                         webApiPanel.Enabled = true;
                         break;
                     case ProjectTypeEnum.MVCWebsite:
@@ -338,6 +368,8 @@ namespace Wizard
 
             projectName.Text = "";
             projectType.SelectedIndex = 0;
+
+            Reset(_projectTypes[0]);
 
             projectName.Enabled = false;
             projectType.Enabled = false;

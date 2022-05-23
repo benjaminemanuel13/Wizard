@@ -30,6 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.authentication = new System.Windows.Forms.CheckBox();
+            this.authenticationDropdown = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -44,7 +46,7 @@
             // authentication
             // 
             this.authentication.AutoSize = true;
-            this.authentication.Location = new System.Drawing.Point(3, 3);
+            this.authentication.Location = new System.Drawing.Point(50, 57);
             this.authentication.Name = "authentication";
             this.authentication.Size = new System.Drawing.Size(160, 17);
             this.authentication.TabIndex = 3;
@@ -52,10 +54,35 @@
             this.authentication.UseVisualStyleBackColor = true;
             this.authentication.CheckedChanged += new System.EventHandler(this.authentication_CheckedChanged);
             // 
+            // authenticationDropdown
+            // 
+            this.authenticationDropdown.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.authenticationDropdown.FormattingEnabled = true;
+            this.authenticationDropdown.Items.AddRange(new object[] {
+            "None",
+            "Windows",
+            "Asp.Net"});
+            this.authenticationDropdown.Location = new System.Drawing.Point(3, 16);
+            this.authenticationDropdown.Name = "authenticationDropdown";
+            this.authenticationDropdown.Size = new System.Drawing.Size(157, 21);
+            this.authenticationDropdown.TabIndex = 4;
+            this.authenticationDropdown.SelectedIndexChanged += new System.EventHandler(this.authenticationDropdown_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(75, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Authentication";
+            // 
             // AngularView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.authenticationDropdown);
             this.Controls.Add(this.authentication);
             this.Controls.Add(this.label1);
             this.Name = "AngularView";
@@ -69,5 +96,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox authentication;
+        private System.Windows.Forms.ComboBox authenticationDropdown;
+        private System.Windows.Forms.Label label2;
     }
 }

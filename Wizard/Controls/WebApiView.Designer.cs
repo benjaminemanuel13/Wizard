@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.minimal = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.conrollerLabel = new System.Windows.Forms.Label();
             this.add = new System.Windows.Forms.Button();
             this.edit = new System.Windows.Forms.Button();
             this.delete = new System.Windows.Forms.Button();
@@ -39,7 +39,7 @@
             // minimal
             // 
             this.minimal.AutoSize = true;
-            this.minimal.Location = new System.Drawing.Point(16, 15);
+            this.minimal.Location = new System.Drawing.Point(16, 19);
             this.minimal.Name = "minimal";
             this.minimal.Size = new System.Drawing.Size(79, 17);
             this.minimal.TabIndex = 1;
@@ -47,18 +47,18 @@
             this.minimal.UseVisualStyleBackColor = true;
             this.minimal.CheckedChanged += new System.EventHandler(this.minimal_CheckedChanged);
             // 
-            // label2
+            // conrollerLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Controllers/Endpoints";
+            this.conrollerLabel.AutoSize = true;
+            this.conrollerLabel.Location = new System.Drawing.Point(13, 52);
+            this.conrollerLabel.Name = "conrollerLabel";
+            this.conrollerLabel.Size = new System.Drawing.Size(56, 13);
+            this.conrollerLabel.TabIndex = 3;
+            this.conrollerLabel.Text = "Controllers";
             // 
             // add
             // 
-            this.add.Location = new System.Drawing.Point(171, 64);
+            this.add.Location = new System.Drawing.Point(171, 68);
             this.add.Name = "add";
             this.add.Size = new System.Drawing.Size(75, 23);
             this.add.TabIndex = 4;
@@ -69,7 +69,7 @@
             // edit
             // 
             this.edit.Enabled = false;
-            this.edit.Location = new System.Drawing.Point(171, 93);
+            this.edit.Location = new System.Drawing.Point(171, 97);
             this.edit.Name = "edit";
             this.edit.Size = new System.Drawing.Size(75, 23);
             this.edit.TabIndex = 5;
@@ -80,7 +80,7 @@
             // delete
             // 
             this.delete.Enabled = false;
-            this.delete.Location = new System.Drawing.Point(171, 122);
+            this.delete.Location = new System.Drawing.Point(171, 126);
             this.delete.Name = "delete";
             this.delete.Size = new System.Drawing.Size(75, 23);
             this.delete.TabIndex = 6;
@@ -91,9 +91,9 @@
             // controllers
             // 
             this.controllers.FormattingEnabled = true;
-            this.controllers.Location = new System.Drawing.Point(16, 64);
+            this.controllers.Location = new System.Drawing.Point(16, 68);
             this.controllers.Name = "controllers";
-            this.controllers.Size = new System.Drawing.Size(149, 121);
+            this.controllers.Size = new System.Drawing.Size(120, 95);
             this.controllers.TabIndex = 7;
             this.controllers.SelectedIndexChanged += new System.EventHandler(this.controllers_SelectedIndexChanged);
             // 
@@ -105,7 +105,7 @@
             this.Controls.Add(this.delete);
             this.Controls.Add(this.edit);
             this.Controls.Add(this.add);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.conrollerLabel);
             this.Controls.Add(this.minimal);
             this.Name = "WebApiView";
             this.Size = new System.Drawing.Size(341, 189);
@@ -117,7 +117,7 @@
 
         #endregion
         private System.Windows.Forms.CheckBox minimal;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label conrollerLabel;
         private System.Windows.Forms.Button add;
         private System.Windows.Forms.Button edit;
         private System.Windows.Forms.Button delete;

@@ -16,6 +16,16 @@ namespace Wizard.Controls
         WizardForm _form;
         WorksProject _project;
 
+        ProjectTemplate _template;
+
+        public ProjectTemplate SelectedTemplate
+        {
+            get
+            {
+                return _template;
+            }
+        }
+
         public AngularView()
         {
             InitializeComponent();
@@ -23,16 +33,7 @@ namespace Wizard.Controls
 
         private void authentication_CheckedChanged(object sender, EventArgs e)
         {
-            if (authentication.Checked)
-            {
-                _project.SelectedTemplate = _form.CurrentProjectType.Templates.Where(x => x.Name == "Authenticated Angular Web Site").First();
-                _project.TemplateFilename = _project.SelectedTemplate.TemplateFilename;
-            }
-            else
-            {
-                _project.SelectedTemplate = _form.CurrentProjectType.Templates.Where(x => x.Name == "Angular Web Site").First();
-                _project.TemplateFilename = _project.SelectedTemplate.TemplateFilename;
-            }
+            
         }
 
         public void Init(WizardForm form, WorksProject project)
@@ -42,17 +43,46 @@ namespace Wizard.Controls
 
             if (_project.SelectedTemplate.Name == "Authenticated Angular Web Site")
             {
-                authentication.Checked = true;
+                authenticationDropdown.SelectedIndex = 2;
+            }
+            else if (_project.SelectedTemplate.Name == "Angular Web Site")
+            {
+                authenticationDropdown.SelectedIndex = 0;
             }
             else
             {
-                authentication.Checked = false;
+                authenticationDropdown.SelectedIndex = 1;
             }
         }
 
         public void Reset()
         {
-            authentication.Checked = false;
+            //authenticationDropdown.SelectedIndex = 0;
+        }
+
+        private void authenticationDropdown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (authenticationDropdown.SelectedIndex == 2)
+            {
+                //_project.SelectedTemplate = _form.CurrentProjectType.Templates.Where(x => x.Name == "Authenticated Angular Web Site").First();
+                //_project.TemplateFilename = _project.SelectedTemplate.TemplateFilename;
+                _template = _form.CurrentProjectType.Templates.Where(x => x.Name == "Authenticated Angular Web Site").First();
+                _template.TemplateFilename = _template.TemplateFilename;
+            }
+            else if (authenticationDropdown.SelectedIndex == 0)
+            {
+                //_project.SelectedTemplate = _form.CurrentProjectType.Templates.Where(x => x.Name == "Angular Web Site").First();
+                //_project.TemplateFilename = _project.SelectedTemplate.TemplateFilename;
+                _template = _form.CurrentProjectType.Templates.Where(x => x.Name == "Angular Web Site").First();
+                _template.TemplateFilename = _template.TemplateFilename;
+            }
+            else
+            {
+                //_project.SelectedTemplate = _form.CurrentProjectType.Templates.Where(x => x.Name == "Windows Auth Angular Web Site").First();
+                //_project.TemplateFilename = _project.SelectedTemplate.TemplateFilename;
+                _template = _form.CurrentProjectType.Templates.Where(x => x.Name == "Windows Auth Angular Web Site").First();
+                _template.TemplateFilename = _template.TemplateFilename;
+            }
         }
     }
 }

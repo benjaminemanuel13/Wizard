@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Wizard.Models.Extensions
 {
-    public class WebApiEndpoint
+    public class WorksControllerBase
     {
         public string Name { get; set; }
 
-        public bool Get { get; set; }
-        public bool Post { get; set; }
-        public bool Put { get; set; }
-        public bool Delete { get; set; }
+        public List<WebApiEndpoint> Endpoints { get; set; } = new List<WebApiEndpoint>();
 
         public override string ToString()
         {

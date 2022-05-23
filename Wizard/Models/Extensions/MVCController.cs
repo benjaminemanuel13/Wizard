@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wizard.Models.Extensions
 {
-    public class WebApiController : WorksControllerBase
+    public class MVCController : WorksControllerBase
     {
-        
     }
 }

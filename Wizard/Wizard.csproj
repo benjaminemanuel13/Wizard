@@ -124,9 +124,13 @@
     </Compile>
     <Compile Include="Helpers\NugetHelper.cs" />
     <Compile Include="Models\Extensions\BaseExtension.cs" />
+    <Compile Include="Models\Extensions\MVCController.cs" />
+    <Compile Include="Models\Extensions\MVCExtension.cs" />
     <Compile Include="Models\Extensions\WebApiController.cs" />
     <Compile Include="Models\Extensions\WebApiEndpoint.cs" />
     <Compile Include="Models\Extensions\WebApiExtension.cs" />
+    <Compile Include="Models\Extensions\WorksControllerBase.cs" />
+    <Compile Include="Models\Extensions\WorksExtensionBase.cs" />
     <Compile Include="Models\ProjectNuget.cs" />
     <Compile Include="Models\ProjectTemplate.cs" />
     <Compile Include="Models\ProjectType.cs" />

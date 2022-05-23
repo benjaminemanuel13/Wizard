@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Solution");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Solution");
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.editProject = new System.Windows.Forms.Button();
             this.deleteProject = new System.Windows.Forms.Button();
@@ -41,17 +41,17 @@
             this.projectName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.webApiPanel = new Wizard.Controls.WebApiView();
+            this.mvcView = new Wizard.Controls.MVCView();
+            this.angularView = new Wizard.Controls.AngularView();
+            this.dataPanel = new Wizard.Controls.DataPanelView();
+            this.servicePanel = new Wizard.Controls.ServiceLibrarySpecificView();
             this.label4 = new System.Windows.Forms.Label();
             this.nugetPackages = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.projectTree = new System.Windows.Forms.TreeView();
             this.close = new System.Windows.Forms.Button();
             this.cancelAll = new System.Windows.Forms.Button();
-            this.mvcView = new Wizard.Controls.MVCView();
-            this.angularView = new Wizard.Controls.AngularView();
-            this.dataPanel = new Wizard.Controls.DataPanelView();
-            this.servicePanel = new Wizard.Controls.ServiceLibrarySpecificView();
-            this.webApiPanel = new Wizard.Controls.WebApiView();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -194,6 +194,47 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Configure Project";
             // 
+            // webApiPanel
+            // 
+            this.webApiPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.webApiPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.webApiPanel.Enabled = false;
+            this.webApiPanel.Location = new System.Drawing.Point(247, 53);
+            this.webApiPanel.Name = "webApiPanel";
+            this.webApiPanel.Size = new System.Drawing.Size(341, 189);
+            this.webApiPanel.TabIndex = 5;
+            this.webApiPanel.Visible = false;
+            // 
+            // mvcView
+            // 
+            this.mvcView.Location = new System.Drawing.Point(247, 53);
+            this.mvcView.Name = "mvcView";
+            this.mvcView.Size = new System.Drawing.Size(341, 189);
+            this.mvcView.TabIndex = 8;
+            // 
+            // angularView
+            // 
+            this.angularView.Location = new System.Drawing.Point(247, 53);
+            this.angularView.Name = "angularView";
+            this.angularView.Size = new System.Drawing.Size(341, 189);
+            this.angularView.TabIndex = 7;
+            // 
+            // dataPanel
+            // 
+            this.dataPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.dataPanel.Location = new System.Drawing.Point(247, 53);
+            this.dataPanel.Name = "dataPanel";
+            this.dataPanel.Size = new System.Drawing.Size(341, 189);
+            this.dataPanel.TabIndex = 2;
+            // 
+            // servicePanel
+            // 
+            this.servicePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.servicePanel.Location = new System.Drawing.Point(247, 53);
+            this.servicePanel.Name = "servicePanel";
+            this.servicePanel.Size = new System.Drawing.Size(341, 189);
+            this.servicePanel.TabIndex = 6;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -226,11 +267,11 @@
             // 
             this.projectTree.Location = new System.Drawing.Point(17, 54);
             this.projectTree.Name = "projectTree";
-            treeNode2.Name = "Solution";
-            treeNode2.Tag = "Root";
-            treeNode2.Text = "Solution";
+            treeNode1.Name = "Solution";
+            treeNode1.Tag = "Root";
+            treeNode1.Text = "Solution";
             this.projectTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.projectTree.Size = new System.Drawing.Size(241, 291);
             this.projectTree.TabIndex = 0;
             this.projectTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.projectTree_AfterSelect);
@@ -255,47 +296,6 @@
             this.cancelAll.Text = "Cancel";
             this.cancelAll.UseVisualStyleBackColor = true;
             this.cancelAll.Click += new System.EventHandler(this.cancelAll_Click);
-            // 
-            // mvcView
-            // 
-            this.mvcView.Location = new System.Drawing.Point(255, 61);
-            this.mvcView.Name = "mvcView";
-            this.mvcView.Size = new System.Drawing.Size(341, 189);
-            this.mvcView.TabIndex = 8;
-            // 
-            // angularView
-            // 
-            this.angularView.Location = new System.Drawing.Point(247, 53);
-            this.angularView.Name = "angularView";
-            this.angularView.Size = new System.Drawing.Size(341, 189);
-            this.angularView.TabIndex = 7;
-            // 
-            // dataPanel
-            // 
-            this.dataPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.dataPanel.Location = new System.Drawing.Point(247, 53);
-            this.dataPanel.Name = "dataPanel";
-            this.dataPanel.Size = new System.Drawing.Size(341, 189);
-            this.dataPanel.TabIndex = 2;
-            // 
-            // servicePanel
-            // 
-            this.servicePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.servicePanel.Location = new System.Drawing.Point(247, 53);
-            this.servicePanel.Name = "servicePanel";
-            this.servicePanel.Size = new System.Drawing.Size(341, 189);
-            this.servicePanel.TabIndex = 6;
-            // 
-            // webApiPanel
-            // 
-            this.webApiPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.webApiPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.webApiPanel.Enabled = false;
-            this.webApiPanel.Location = new System.Drawing.Point(247, 53);
-            this.webApiPanel.Name = "webApiPanel";
-            this.webApiPanel.Size = new System.Drawing.Size(341, 184);
-            this.webApiPanel.TabIndex = 5;
-            this.webApiPanel.Visible = false;
             // 
             // WizardForm
             // 

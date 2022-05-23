@@ -31,24 +31,24 @@
             this.label1 = new System.Windows.Forms.Label();
             this.name = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.methods = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.addMethod = new System.Windows.Forms.Button();
-            this.editMethod = new System.Windows.Forms.Button();
-            this.deleteMethod = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.method = new System.Windows.Forms.GroupBox();
+            this.cancelMethod = new System.Windows.Forms.Button();
+            this.saveMethod = new System.Windows.Forms.Button();
+            this.deleteMethod = new System.Windows.Forms.CheckBox();
+            this.putMethod = new System.Windows.Forms.CheckBox();
+            this.methodName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.postMethod = new System.Windows.Forms.CheckBox();
+            this.getMethod = new System.Windows.Forms.CheckBox();
+            this.deleteThisMethod = new System.Windows.Forms.Button();
+            this.editMethod = new System.Windows.Forms.Button();
+            this.addMethod = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.methods = new System.Windows.Forms.ListBox();
+            this.save = new System.Windows.Forms.Button();
+            this.cancel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.method.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -69,8 +69,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.deleteMethod);
+            this.groupBox1.Controls.Add(this.method);
+            this.groupBox1.Controls.Add(this.deleteThisMethod);
             this.groupBox1.Controls.Add(this.editMethod);
             this.groupBox1.Controls.Add(this.addMethod);
             this.groupBox1.Controls.Add(this.label2);
@@ -82,89 +82,70 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Methods";
             // 
-            // methods
+            // method
             // 
-            this.methods.FormattingEnabled = true;
-            this.methods.Location = new System.Drawing.Point(18, 42);
-            this.methods.Name = "methods";
-            this.methods.Size = new System.Drawing.Size(164, 134);
-            this.methods.TabIndex = 0;
+            this.method.Controls.Add(this.cancelMethod);
+            this.method.Controls.Add(this.saveMethod);
+            this.method.Controls.Add(this.deleteMethod);
+            this.method.Controls.Add(this.putMethod);
+            this.method.Controls.Add(this.methodName);
+            this.method.Controls.Add(this.label3);
+            this.method.Controls.Add(this.postMethod);
+            this.method.Controls.Add(this.getMethod);
+            this.method.Enabled = false;
+            this.method.Location = new System.Drawing.Point(295, 42);
+            this.method.Name = "method";
+            this.method.Size = new System.Drawing.Size(200, 215);
+            this.method.TabIndex = 5;
+            this.method.TabStop = false;
+            this.method.Text = "Method";
             // 
-            // label2
+            // cancelMethod
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Name";
+            this.cancelMethod.Location = new System.Drawing.Point(119, 177);
+            this.cancelMethod.Name = "cancelMethod";
+            this.cancelMethod.Size = new System.Drawing.Size(75, 23);
+            this.cancelMethod.TabIndex = 7;
+            this.cancelMethod.Text = "Cancel";
+            this.cancelMethod.UseVisualStyleBackColor = true;
+            this.cancelMethod.Click += new System.EventHandler(this.cancelMethod_Click);
             // 
-            // addMethod
+            // saveMethod
             // 
-            this.addMethod.Location = new System.Drawing.Point(188, 42);
-            this.addMethod.Name = "addMethod";
-            this.addMethod.Size = new System.Drawing.Size(75, 23);
-            this.addMethod.TabIndex = 2;
-            this.addMethod.Text = "Add";
-            this.addMethod.UseVisualStyleBackColor = true;
-            // 
-            // editMethod
-            // 
-            this.editMethod.Enabled = false;
-            this.editMethod.Location = new System.Drawing.Point(188, 71);
-            this.editMethod.Name = "editMethod";
-            this.editMethod.Size = new System.Drawing.Size(75, 23);
-            this.editMethod.TabIndex = 3;
-            this.editMethod.Text = "Edit";
-            this.editMethod.UseVisualStyleBackColor = true;
+            this.saveMethod.Location = new System.Drawing.Point(38, 177);
+            this.saveMethod.Name = "saveMethod";
+            this.saveMethod.Size = new System.Drawing.Size(75, 23);
+            this.saveMethod.TabIndex = 6;
+            this.saveMethod.Text = "Save";
+            this.saveMethod.UseVisualStyleBackColor = true;
+            this.saveMethod.Click += new System.EventHandler(this.saveMethod_Click);
             // 
             // deleteMethod
             // 
-            this.deleteMethod.Enabled = false;
-            this.deleteMethod.Location = new System.Drawing.Point(188, 100);
+            this.deleteMethod.AutoSize = true;
+            this.deleteMethod.Location = new System.Drawing.Point(18, 145);
             this.deleteMethod.Name = "deleteMethod";
-            this.deleteMethod.Size = new System.Drawing.Size(75, 23);
-            this.deleteMethod.TabIndex = 4;
-            this.deleteMethod.Text = "Delete";
+            this.deleteMethod.Size = new System.Drawing.Size(96, 17);
+            this.deleteMethod.TabIndex = 5;
+            this.deleteMethod.Text = "Delete Method";
             this.deleteMethod.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // putMethod
             // 
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.checkBox4);
-            this.groupBox2.Controls.Add(this.checkBox3);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Enabled = false;
-            this.groupBox2.Location = new System.Drawing.Point(295, 42);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 215);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Method";
+            this.putMethod.AutoSize = true;
+            this.putMethod.Location = new System.Drawing.Point(18, 122);
+            this.putMethod.Name = "putMethod";
+            this.putMethod.Size = new System.Drawing.Size(81, 17);
+            this.putMethod.TabIndex = 4;
+            this.putMethod.Text = "Put Method";
+            this.putMethod.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // methodName
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(18, 76);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(82, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Get Method";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(18, 99);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(86, 17);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Post Method";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.methodName.Location = new System.Drawing.Point(18, 45);
+            this.methodName.Name = "methodName";
+            this.methodName.Size = new System.Drawing.Size(150, 20);
+            this.methodName.TabIndex = 3;
             // 
             // label3
             // 
@@ -175,68 +156,95 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Name";
             // 
-            // textBox2
+            // postMethod
             // 
-            this.textBox2.Location = new System.Drawing.Point(18, 45);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(150, 20);
-            this.textBox2.TabIndex = 3;
+            this.postMethod.AutoSize = true;
+            this.postMethod.Location = new System.Drawing.Point(18, 99);
+            this.postMethod.Name = "postMethod";
+            this.postMethod.Size = new System.Drawing.Size(86, 17);
+            this.postMethod.TabIndex = 1;
+            this.postMethod.Text = "Post Method";
+            this.postMethod.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // getMethod
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(18, 122);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(81, 17);
-            this.checkBox3.TabIndex = 4;
-            this.checkBox3.Text = "Put Method";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.getMethod.AutoSize = true;
+            this.getMethod.Location = new System.Drawing.Point(18, 76);
+            this.getMethod.Name = "getMethod";
+            this.getMethod.Size = new System.Drawing.Size(82, 17);
+            this.getMethod.TabIndex = 0;
+            this.getMethod.Text = "Get Method";
+            this.getMethod.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // deleteThisMethod
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(18, 145);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(96, 17);
-            this.checkBox4.TabIndex = 5;
-            this.checkBox4.Text = "Delete Method";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.deleteThisMethod.Enabled = false;
+            this.deleteThisMethod.Location = new System.Drawing.Point(188, 100);
+            this.deleteThisMethod.Name = "deleteThisMethod";
+            this.deleteThisMethod.Size = new System.Drawing.Size(75, 23);
+            this.deleteThisMethod.TabIndex = 4;
+            this.deleteThisMethod.Text = "Delete";
+            this.deleteThisMethod.UseVisualStyleBackColor = true;
+            this.deleteThisMethod.Click += new System.EventHandler(this.deleteThisMethod_Click);
             // 
-            // button1
+            // editMethod
             // 
-            this.button1.Location = new System.Drawing.Point(38, 177);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.editMethod.Enabled = false;
+            this.editMethod.Location = new System.Drawing.Point(188, 71);
+            this.editMethod.Name = "editMethod";
+            this.editMethod.Size = new System.Drawing.Size(75, 23);
+            this.editMethod.TabIndex = 3;
+            this.editMethod.Text = "Edit";
+            this.editMethod.UseVisualStyleBackColor = true;
+            this.editMethod.Click += new System.EventHandler(this.editMethod_Click);
             // 
-            // button2
+            // addMethod
             // 
-            this.button2.Location = new System.Drawing.Point(119, 177);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addMethod.Location = new System.Drawing.Point(188, 42);
+            this.addMethod.Name = "addMethod";
+            this.addMethod.Size = new System.Drawing.Size(75, 23);
+            this.addMethod.TabIndex = 2;
+            this.addMethod.Text = "Add";
+            this.addMethod.UseVisualStyleBackColor = true;
+            this.addMethod.Click += new System.EventHandler(this.addMethod_Click);
             // 
-            // button3
+            // label2
             // 
-            this.button3.Location = new System.Drawing.Point(377, 348);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 26);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Name";
             // 
-            // button4
+            // methods
             // 
-            this.button4.Location = new System.Drawing.Point(458, 348);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "Cancel";
-            this.button4.UseVisualStyleBackColor = true;
+            this.methods.FormattingEnabled = true;
+            this.methods.Location = new System.Drawing.Point(18, 42);
+            this.methods.Name = "methods";
+            this.methods.Size = new System.Drawing.Size(164, 134);
+            this.methods.TabIndex = 0;
+            this.methods.SelectedIndexChanged += new System.EventHandler(this.methods_SelectedIndexChanged);
+            // 
+            // save
+            // 
+            this.save.Location = new System.Drawing.Point(377, 348);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(75, 23);
+            this.save.TabIndex = 3;
+            this.save.Text = "Save";
+            this.save.UseVisualStyleBackColor = true;
+            this.save.Click += new System.EventHandler(this.save_Click);
+            // 
+            // cancel
+            // 
+            this.cancel.Location = new System.Drawing.Point(458, 348);
+            this.cancel.Name = "cancel";
+            this.cancel.Size = new System.Drawing.Size(75, 23);
+            this.cancel.TabIndex = 4;
+            this.cancel.Text = "Cancel";
+            this.cancel.UseVisualStyleBackColor = true;
+            this.cancel.Click += new System.EventHandler(this.cancel_Click);
             // 
             // ControllerForm
             // 
@@ -244,8 +252,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 386);
             this.ControlBox = false;
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.cancel);
+            this.Controls.Add(this.save);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.name);
             this.Controls.Add(this.label1);
@@ -255,10 +263,11 @@
             this.Name = "ControllerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Controller";
+            this.Load += new System.EventHandler(this.ControllerForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.method.ResumeLayout(false);
+            this.method.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -269,21 +278,21 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox name;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.GroupBox method;
+        private System.Windows.Forms.Button cancelMethod;
+        private System.Windows.Forms.Button saveMethod;
+        private System.Windows.Forms.CheckBox deleteMethod;
+        private System.Windows.Forms.CheckBox putMethod;
+        private System.Windows.Forms.TextBox methodName;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button deleteMethod;
+        private System.Windows.Forms.CheckBox postMethod;
+        private System.Windows.Forms.CheckBox getMethod;
+        private System.Windows.Forms.Button deleteThisMethod;
         private System.Windows.Forms.Button editMethod;
         private System.Windows.Forms.Button addMethod;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox methods;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button save;
+        private System.Windows.Forms.Button cancel;
     }
 }
