@@ -30,7 +30,11 @@ namespace Wizard.Helpers
         {
             //var packageId = "newtonsoft.json";
             var settings = Settings.LoadDefaultSettings(root: null);
+            
             var sourceRepositoryProvider = new SourceRepositoryProvider(settings, Repository.Provider.GetCoreV3());
+
+            string source = "https://pkgs.dev.azure.com/theworksdev/_packaging/theworksdev/nuget/v3/index.json";
+            sourceRepositoryProvider.CreateRepository(new PackageSource(source));
 
             using (var cacheContext = new SourceCacheContext())
             {
@@ -77,7 +81,11 @@ namespace Wizard.Helpers
                     SHGetSpecialFolderPath(IntPtr.Zero, allUserProfile, CSIDL_LOCAL_APPDATA, false);
                     string commonDesktopPath = allUserProfile.ToString();
 
-                    string nugetPath = commonDesktopPath.Substring(0, commonDesktopPath.LastIndexOf("AppData")) + ".nuget";
+                    string thePath = commonDesktopPath.Substring(0, commonDesktopPath.LastIndexOf("AppData"));
+
+                    //MessageBox.Show("Path: " + thePath);
+
+                    string nugetPath =  thePath + ".nuget";
                     string path = nugetPath + "\\packages";
 
                     if (!Directory.Exists(path))
@@ -129,8 +137,6 @@ namespace Wizard.Helpers
                         framework, cacheContext, logger, repositories, availablePackages);
                 }
             }
-
-            
         }
     }
 }

@@ -3,6 +3,7 @@ using EnvDTE80;
 using Microsoft.VisualStudio.TemplateWizard;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -45,8 +46,9 @@ namespace Wizard
 
             foreach (var project in _form.ESInterfaceProject.Projects)
             {
+                
                 AddProject(solutionPath, project.ProjectName, project.TemplateFilename);
-
+                
                 foreach (var nuget in project.Nugets)
                 {
                     //Add Nuget Package to Project
@@ -118,8 +120,6 @@ namespace Wizard
                                 MessageBox.Show(ex.Message);
                             }
 
-
-
                             break;
                         }
                     }
@@ -127,6 +127,7 @@ namespace Wizard
 
                 foreach (Project proj in dte.DTE.Solution.Projects)
                 {
+                    
                     if (proj.Name == project.ProjectName)
                     {
                         string filepath = proj.FullName;
@@ -144,8 +145,6 @@ namespace Wizard
 
                                     if (item.Name == "Controllers" && project.SelectedTemplate.Name == "Web Api")
                                     {
-                                        MessageBox.Show("X>3");
-
                                         foreach (var controller in apiext.Controllers)
                                         {
                                             AddItem(item, controller.Name, "WorksApiController.zip");
@@ -446,6 +445,9 @@ namespace Wizard
                                 }
 
                                 break;
+                            case Models.ProjectTypeEnum.AngularWebsite:
+                                
+                                break;
                             }
                         }
                     }
@@ -483,6 +485,7 @@ namespace Wizard
             try
             {
                 string templatePath = sol.GetProjectTemplate(templateFilename, "CSharp");
+                
                 dte.DTE.Solution.AddFromTemplate(templatePath, projectPath, projectName, false);
 
                 var path = dte.DTE.Solution.FullName;

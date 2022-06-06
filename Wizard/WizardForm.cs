@@ -15,9 +15,9 @@ namespace Wizard
     public partial class WizardForm : Form
     {
         private List<ProjectType> _projectTypes = new List<ProjectType>() {
-            new ProjectType() { Name="WebApi", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name= "Web Api", TemplateFilename = "WorksWebApi.zip" }, new ProjectTemplate() { Name = "Minimal Web Api", TemplateFilename = "WorksMinimalWebApi.zip" } }, Type = ProjectTypeEnum.WebApi },
-            new ProjectType() { Name="MVC Web Site" , Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name = "MVC Web Site", TemplateFilename = "WorksMvcWeb.zip" }, new ProjectTemplate() { Name= "Authenticated MVC Web Site", TemplateFilename = "WorksAuthMvcWeb.zip" } }, Type = ProjectTypeEnum.MVCWebsite },
-            new ProjectType() { Name="Angular Web Site" , Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name = "Angular Web Site", TemplateFilename = "WorksAngularWeb.zip" }, new ProjectTemplate() { Name = "Authenticated Angular Web Site", TemplateFilename = "WorksAuthAngularWeb.zip" }, new ProjectTemplate() { Name = "Windows Auth Angular Web Site", TemplateFilename = "WorksWindowsAngularWeb.zip" } }, Type = ProjectTypeEnum.AngularWebsite },
+            new ProjectType() { Name="WebApi", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name= "Web Api", TemplateFilename = "WorksWebApi.zip" }, new ProjectTemplate() { Name = "Minimal Web Api", TemplateFilename = "WorksMinApi.zip" } }, Type = ProjectTypeEnum.WebApi },
+            new ProjectType() { Name="MVC Web Site" , Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name = "MVC Web Site", TemplateFilename = "WorksMvcWeb.zip" }, new ProjectTemplate() { Name= "Authenticated MVC Web Site", TemplateFilename = "WorksAuthMvc.zip" } }, Type = ProjectTypeEnum.MVCWebsite },
+            new ProjectType() { Name="Angular Web Site" , Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { Name = "Angular Web Site", TemplateFilename = "WorksAng.zip" }, new ProjectTemplate() { Name = "Authenticated Angular Web Site", TemplateFilename = "WorksAuthAng.zip" }, new ProjectTemplate() { Name = "Windows Auth Angular Web Site", TemplateFilename = "WorksWinAng.zip" } }, Type = ProjectTypeEnum.AngularWebsite },
             new ProjectType() { Name="Service Library", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { TemplateFilename = "WorksServiceLibrary.zip" } }, Type = ProjectTypeEnum.ServiceLibrary },
             new ProjectType() { Name="Data Layer", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { TemplateFilename = "WorksDataLayer.zip" } } , Type = ProjectTypeEnum.DataLayer },
             new ProjectType() { Name="Console App", Templates = new List<ProjectTemplate>(){ new ProjectTemplate() { TemplateFilename = "WorksConsole.zip" } }, Type = ProjectTypeEnum.Console }
@@ -186,74 +186,88 @@ namespace Wizard
 
         private void saveProject_Click(object sender, EventArgs e)
         {
-            ProjectType projType = (ProjectType)projectType.SelectedItem;
-
-            if (!editing)
+            try
             {
-                foreach (var nugetCheck in nugetPackages.CheckedItems)
+                ProjectType projType = (ProjectType)projectType.SelectedItem;
+
+                if (!editing)
                 {
-                    ProjectNuget nuget = (ProjectNuget)nugetCheck;
-                    thisProject.Nugets.Add(nuget);
+                    foreach (var nugetCheck in nugetPackages.CheckedItems)
+                    {
+                        ProjectNuget nuget = (ProjectNuget)nugetCheck;
+                        thisProject.Nugets.Add(nuget);
+                    }
+
+                    _properties.Projects.Add(thisProject);
+                    thisProject.ProjectName = projectName.Text;
+
+                    ProjectTemplate pType = null;
+
+                    switch (projType.Type)
+                    {
+                        case ProjectTypeEnum.WebApi:
+                            pType = webApiPanel.SelectedTemplate;
+                            break;
+                        case ProjectTypeEnum.MVCWebsite:
+                            pType = mvcView.SelectedTemplate;
+                            break;
+                        case ProjectTypeEnum.AngularWebsite:
+                            pType = angularView.SelectedTemplate;
+                            break;
+                    }
+
+                    thisProject.ProjectType = projType.Type;
+
+                    
+                    thisProject.SelectedTemplate = pType;
+
+                    
+
+                    
+                    thisProject.TemplateFilename = pType.TemplateFilename;
+
+                    
+                    var node = projectTree.Nodes[0].Nodes.Add(projectName.Text);
+                    node.Tag = thisProject;
+                }
+                else
+                {
+                    var project = (WorksProject)projectTree.SelectedNode.Tag;
+                    project.ProjectName = projectName.Text;
+
+                    project.Nugets.Clear();
+
+                    foreach (var nugetCheck in nugetPackages.CheckedItems)
+                    {
+                        ProjectNuget nuget = (ProjectNuget)nugetCheck;
+                        project.Nugets.Add(nuget);
+                    }
+
+                    ProjectTemplate pType = null;
+
+                    switch (projType.Type)
+                    {
+                        case ProjectTypeEnum.WebApi:
+                            pType = webApiPanel.SelectedTemplate;
+                            break;
+                        case ProjectTypeEnum.MVCWebsite:
+                            pType = mvcView.SelectedTemplate;
+                            break;
+                        case ProjectTypeEnum.AngularWebsite:
+                            pType = angularView.SelectedTemplate;
+                            break;
+                    }
+
+                    project.ProjectType = projType.Type;
+                    project.SelectedTemplate = pType;
+                    project.TemplateFilename = pType.TemplateFilename;
                 }
 
-                _properties.Projects.Add(thisProject);
-                thisProject.ProjectName = projectName.Text;
-
-                ProjectTemplate pType = null;
-
-                switch (projType.Type)
-                {
-                    case ProjectTypeEnum.WebApi:
-                        pType = webApiPanel.SelectedTemplate;
-                        break;
-                    case ProjectTypeEnum.MVCWebsite:
-                        pType = mvcView.SelectedTemplate;
-                        break;
-                    case ProjectTypeEnum.AngularWebsite:
-                        pType = angularView.SelectedTemplate;
-                        break;
-                }
-
-                thisProject.ProjectType = projType.Type;
-                thisProject.SelectedTemplate = pType;
-                thisProject.TemplateFilename = pType.TemplateFilename;
-
-                var node = projectTree.Nodes[0].Nodes.Add(projectName.Text);
-                node.Tag = thisProject;
             }
-            else
+            catch (Exception ex)
             {
-                var project = (WorksProject)projectTree.SelectedNode.Tag;
-                project.ProjectName = projectName.Text;
-                
-                project.Nugets.Clear();
-
-                foreach (var nugetCheck in nugetPackages.CheckedItems)
-                {
-                    ProjectNuget nuget = (ProjectNuget)nugetCheck;
-                    project.Nugets.Add(nuget);
-                }
-
-                ProjectTemplate pType = null;
-
-                switch (projType.Type)
-                {
-                    case ProjectTypeEnum.WebApi:
-                        pType = webApiPanel.SelectedTemplate;
-                        break;
-                    case ProjectTypeEnum.MVCWebsite:
-                        pType = mvcView.SelectedTemplate;
-                        break;
-                    case ProjectTypeEnum.AngularWebsite:
-                        pType = angularView.SelectedTemplate;
-                        break;
-                }
-
-                project.ProjectType = projType.Type;
-                project.SelectedTemplate = pType;
-                project.TemplateFilename = pType.TemplateFilename;
+                MessageBox.Show(ex.Message);
             }
-
             newProject.Enabled = true;
 
             projectName.Text = "";

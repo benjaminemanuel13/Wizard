@@ -74,6 +74,9 @@ namespace Wizard.Controls
                 conrollerLabel.Text = "Controllers";
             }
 
+            _template = _project.SelectedTemplate;
+            _template.TemplateFilename = _template.TemplateFilename;
+
             controllers.Items.Clear();
 
             foreach (var controller in _ext.Controllers)
@@ -88,6 +91,11 @@ namespace Wizard.Controls
         }
 
         private void minimal_CheckedChanged(object sender, EventArgs e)
+        {
+            SetTemplate();
+        }
+
+        private void SetTemplate()
         {
             if (minimal.Checked)
             {
